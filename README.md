@@ -2,6 +2,8 @@
 
 json-output-salvage repairs the common ways LLM-emitted JSON breaks — code fences, prose around the object, trailing commas, single quotes, smart quotes, mid-string truncation — and reports exactly which repairs it applied. Use it at the boundary between a model and your JSON parser, when a failed parse should trigger recovery instead of an exception. Confidence: High (≥80%) for the listed repair classes, per the 72-check suite.
 
+<p align="center"><img src="docs/demo.gif" alt="demo" width="720"></p>
+
 ## Problem
 
 LLMs produce almost-JSON constantly: a fenced block with a chatty preamble, a trailing comma, curly quotes from a copy-pasted prompt, or output cut off mid-token by a token limit. `json.loads` rejects all of it, and ad-hoc `try/except` repairs scattered across a codebase are inconsistent and unauditable. When you cannot re-prompt (cost, latency, offline), you need one deterministic repair function whose every mutation is recorded.
